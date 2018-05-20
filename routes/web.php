@@ -39,7 +39,10 @@ Route::group(['middleware' =>'auth'], function(){
 
    // Transaction
    Route::get('transaction/index', 'TransactionController@index')->name('transaction/index');
+   Route::get('transaction/destroy/{id}', 'TransactionController@destroy')->name('transaction/destroy');
    Route::post('transaction/importExcel', 'TransactionController@importExcel')->name('transaction/importExcel');
-   Route::get('transaction/exportToExcel/{date1}/{date2}/{type}', 'TransactionController@exportToExcel')->name('transaction/exportToExcel');
-   Route::get('transaction/exportToPdf/{date1}/{date2}', 'TransactionController@exportToPdf')->name('transaction/exportToPdf');
+   Route::post('transaction/multipleDestroy', 'TransactionController@multipleDestroy')->name('transaction/multipleDestroy');
+   Route::get('transaction/exportToPdf/{date1}/{date2}/{wallet}/{category}', 'TransactionController@exportToPdf')->name('transaction/exportToPdf');
+   Route::get('transaction/exportToExcel/{date1}/{date2}/{type}/{wallet}/{category}', 'TransactionController@exportToExcel')->name('transaction/exportToExcel');
+   Route::get('transaction/reportByCategory', 'TransactionController@reportByCategory')->name('transaction/reportByCategory');
 });

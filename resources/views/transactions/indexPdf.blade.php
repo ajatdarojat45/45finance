@@ -18,7 +18,6 @@
              <thead>
                  <tr>
                      <th style="text-align: center;">No</th>
-                     <th style="text-align: center;">Currency</th>
                      <th style="text-align: center;">Wallet</th>
                      <th style="text-align: center;">Category</th>
                      <th style="text-align: center;">Note</th>
@@ -26,7 +25,6 @@
                      <th style="text-align: center;">Debit</th>
                      <th style="text-align: center;">Balance</th>
                      <th style="text-align: center;">Date</th>
-                     <th style="text-align: center;">Action</th>
                  </tr>
              </thead>
              <tbody>
@@ -48,7 +46,6 @@
                 @foreach ($data['transactions'] as $transaction)
                    <tr>
                       <td class="text-center">{{++$no}}</td>
-                      <td class="text-left">{{$transaction->currency}}</td>
                       <td class="text-left">{{$transaction->wallet}}</td>
                       <td class="text-left">{{$transaction->category}}</td>
                       <td class="text-left">{{$transaction->note}}</td>
@@ -74,7 +71,6 @@
                             {{ GlobalHelper::f_currency($balance = $total + $creditTotal + $debetTotal) }}
                       </td>
                       <td class="text-center">{{date('d M. Y', strtotime($transaction->date))}}</td>
-                      <td></td>
                    </tr>
                    @php
                      $labels[] = date('d M. Y', strtotime($transaction->date));
@@ -86,23 +82,21 @@
              </tbody>
              <tfoot>
              <tr>
-                 <th colspan="5" style="text-align: center">Subtotal</th>
+                 <th colspan="4" style="text-align: center">Subtotal</th>
                  <th style="text-align: right; color:green;">{{GlobalHelper::f_currency($creditTotal)}} </th>
                  <th style="text-align: right; color:red;">{{GlobalHelper::f_currency($debetTotal)}}</th>
                  <th style="text-align: right;">
                      {{ GlobalHelper::f_currency($creditTotal + $debetTotal) }}
                  </th>
                  <th></th>
-                 <th></th>
              </tr>
              <tr>
-                 <th colspan="5" style="text-align: center">Total</th>
+                 <th colspan="4" style="text-align: center">Total</th>
                  <th style="text-align: right;">{{GlobalHelper::f_currency($data['total'])}} </th>
                  <th style="text-align: right;">{{GlobalHelper::f_currency($creditTotal + $debetTotal) }}</th>
                  <th style="text-align: right;">
                      {{GlobalHelper::f_currency($data['total'] + $creditTotal + $debetTotal) }}
                  </th>
-                 <th></th>
                  <th></th>
              </tr>
              </tfoot>

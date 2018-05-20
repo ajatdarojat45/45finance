@@ -28,11 +28,15 @@ class TransactionController extends Controller
       $date3 = '';
 
       if (empty($request->date1)) {
-         $date1 = date('Y/m/d');
-         $date2 = date('Y/m/d');
+         $date1      = date('Y/m/d');
+         $date2      = date('Y/m/d');
+         $dompet     = 'all';
+         $kategori   = 'all';
       }else {
          $date1      =  $request->date1;
          $date2      =  $request->date2;
+         $dompet     =  $request->wallet;
+         $kategori   =  $request->category;
       }
 
       if ($date2 < $date1) {
@@ -42,9 +46,12 @@ class TransactionController extends Controller
       }
 
       $transactions = new Transaction;
-      $data = $transactions->getData($date1, $date2);
+      $data = $transactions->getData($date1, $date2, $dompet, $kategori);
 
-		return view('transactions.index', compact('date1', 'date2', 'data', 'no'));
+      $wallets = Transaction::where('user_id', Auth::user()->id)->groupBy('wallet')->get();
+      $categories = Transaction::where('user_id', Auth::user()->id)->groupBy('category')->get();
+
+		return view('transactions.index', compact('date1', 'date2', 'dompet', 'kategori', 'data', 'no', 'wallets', 'categories'));
 	}
 
    public function importExcel()
@@ -86,15 +93,14 @@ class TransactionController extends Controller
 		return back()->with('warning', 'Please select file');
 	}
 
-   public function exportToExcel($date1, $date2, $type)
+   public function exportToExcel($date1, $date2, $type, $wallet, $category)
 	{
-      $data = Transaction::select('wallet', 'category', 'note', 'nominal', 'currency', 'date')
-                     ->where('user_id', Auth::user()->id)
-                     ->whereBetween('date', array($date1, $date2))
-                     ->orderBy('date', 'asc')
-                     ->get()
-                     ->toArray();
-
+      // mengambil data dari db
+      $transactions = new Transaction;
+      $transactions = $transactions->getData($date1, $date2, $wallet, $category);
+      // rubah data collection ke array
+      $data = $transactions['transactions']->toArray();
+      // export data ke excel
 		return Excel::create('transaction', function($excel) use ($data) {
 			$excel->sheet('transaction sheet', function($sheet) use ($data)
 	        {
@@ -103,16 +109,76 @@ class TransactionController extends Controller
 		})->download($type);
 	}
 
-   public function exportToPdf($date1, $date2)
+   public function exportToPdf($date1, $date2, $wallet, $category)
    {
       $no = 0;
+      // mengambil data dari db
       $transactions = new Transaction;
-      $data = $transactions->getData($date1, $date2);
-
+      $data = $transactions->getData($date1, $date2, $wallet, $category);
+      // export to pdf
       $html = view('transactions.indexPdf', compact('data', 'date1', 'date2', 'no'))->render();
-
       return $this->pdf
            ->load($html, 'A4', 'landscape')
            ->show();
+   }
+
+   public function destroy($id)
+   {
+      $transaction = Transaction::findOrFail($id);
+
+      if($transaction->isOwner()){
+         $transaction->delete();
+      }else{
+         return back()->with('warning', 'You can not delete this data.');
+      }
+
+      return back()->with('success', 'Data Deleted');
+   }
+
+   public function multipleDestroy(Request $request)
+   {
+      // dd($request->transactions);
+      if ($request->transactions != null) {
+         foreach ($request->transactions as $data) {
+            $transaction = Transaction::where('id', $data)
+                                       ->where('user_id', Auth::user()->id)
+                                       ->first();
+            $transaction->delete();
+         }
+         return back()->with('success', 'Data Deleted');
+
+      }else {
+         return back()->with('warning', 'Please select data.');
+      }
+   }
+
+   public function ReportByCategory(Request $request)
+   {
+      $date3 = '';
+
+      if (empty($request->date1)) {
+         $date1      = date('Y/m/d');
+         $date2      = date('Y/m/d');
+         $dompet     = 'all';
+         $type       = 'debet';
+      }else {
+         $date1      =  $request->date1;
+         $date2      =  $request->date2;
+         $dompet     =  $request->wallet;
+         $type       =  $request->type;
+      }
+
+      if ($date2 < $date1) {
+         $date3 = $date2;
+         $date2 = $date1;
+         $date1 = $date3;
+      }
+
+      $transactions = new Transaction;
+      $chart = $transactions->reportByCategory($date1, $date2, $dompet, $type);
+
+      $wallets = Transaction::where('user_id', Auth::user()->id)->groupBy('wallet')->get();
+
+      return view('transactions.reportByCategory', compact('date1', 'date2', 'dompet', 'wallets', 'chart', 'type'));
    }
 }

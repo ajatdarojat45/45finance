@@ -10,14 +10,20 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> {{-- bootstrap --}}
-    <link href="{{asset('bootstrap-3/css/bootstrap.min.css')}}" rel="stylesheet"> {{-- dataTables --}}
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- bootstrap --}}
+    <link href="{{asset('bootstrap-3/css/bootstrap.min.css')}}" rel="stylesheet">
+    {{-- dataTables --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    {{-- font awsome  --}}
     <link href="{{ asset('inspinia/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+    {{-- date picker --}}
     <link href="{{ asset('inspinia/css/plugins/datapicker/datepicker3.css') }}" rel="stylesheet">
    <link href="{{ asset('inspinia/css/plugins/daterangepicker/daterangepicker-bs3.css') }}" rel="stylesheet">
+   {{-- chart --}}
     {!! Charts::assets() !!}
-    
+    <!-- Sweet Alert -->
+   <link href="{{ asset('inspinia/css/plugins/sweetalert/sweetalert.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -38,7 +44,16 @@
                     @guest
                     @else
                        <li><a class="nav-link" href="{{ route('transaction/index') }}">Transaction</a></li>
-                       <li><a class="nav-link" href="#" style="margin-left:10px;">Report</a></li>
+                       <li class="nav-item dropdown" style="margin-left:10px;">
+                          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                             Report
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                             <a class="dropdown-item" href"#">Report by Category</a>
+                             <a class="dropdown-item" href"#">Report By Date</a>
+                             <a class="dropdown-item" href"#">Report By Month</a>
+                             <a class="dropdown-item" href"#">Report By Year</a>
+                          </div>
                        </li>
                     @endguest
                     </ul>
@@ -92,6 +107,8 @@
    <script src="{{ asset('inspinia/js/plugins/datapicker/bootstrap-datepicker.js') }} "></script>
    <!-- Date range picker -->
    <script src="{{ asset('inspinia/js/plugins/daterangepicker/daterangepicker.js') }}"></script>
+   <!-- Sweet alert -->
+   <script src="{{ asset('inspinia/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#example1').DataTable();
@@ -144,6 +161,25 @@
          keyboardNavigation: false,
          forceParse: false,
          autoclose: true
+      });
+   </script>
+   <script>
+      jQuery(document).ready(function($) {
+         $('.confirm').on('click', function() {
+            var getLink = $(this).attr('href');
+            swal({
+                  title: "Are you sure?",
+                  text: "do this action",
+                  type: "warning",
+                  html: true,
+                  confirmButtonColor: '#d9534f',
+                  showCancelButton: true,
+               },
+               function() {
+                  window.location.href = getLink
+               });
+            return false;
+         });
       });
    </script>
 </body>
