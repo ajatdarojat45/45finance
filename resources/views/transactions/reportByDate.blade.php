@@ -19,14 +19,14 @@
 	<center>
 		<a href="{{route('dashboard')}}" style="color:#808080">/Dashboard</a>
       <b style="color:#808080">/Report</b>
-		<b style="color:#808080">/Transaction Report by Category</b>
+		<b style="color:#808080">/Transaction Report by Date</b>
 	</center>
 	<br>
 	<div class="row">
 		<div class="col-lg-12 col-md-12">
 			<div class="tabs-container">
 				<ul class="nav nav-tabs">
-					<li class="active"><a data-toggle="tab" href="#deposit"> Transaction Report by Category</a></li>
+					<li class="active"><a data-toggle="tab" href="#deposit"> Transaction Report by Date</a></li>
 					{{-- <li class=""><a data-toggle="tab" href="#graph"> Graph</a></li> --}}
 				</ul>
 				<div class="tab-content">
@@ -36,15 +36,7 @@
 							<div class="row">
 								<div class="col-md-6 col-lg-6">
    								 <label for="formGroupExampleInput">Search :</label>
-									 <form class="" action="{{route('transaction/reportByCategory')}}" method="get">
-                               <div class="input-group" style="margin-bottom:5px;">
-                                  <span class="input-group-addon"><i class="fa fa-exchange"></i> Type</span>
-                                  <select name="type" style="height:32px" class="form-control" required="required">
-                                      <option value="">-- Please select type --</option>
-                                      <option value="debet"  @if ($type == 'debet') selected @endif>Debet</option>
-                                     <option value="credit"  @if ($type == 'credit') selected @endif>Credit</option>
-                                  </select>
-                               </div>
+									 <form class="" action="{{route('transaction/reportByDate')}}" method="get">
                                <div class="input-group" style="margin-bottom:5px;">
                                   <span class="input-group-addon"><i class="fa fa-google-wallet"></i> Wallet</span>
                                   <select name="wallet" style="height:32px" class="form-control" required="required">

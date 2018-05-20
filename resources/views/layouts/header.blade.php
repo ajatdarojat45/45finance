@@ -49,10 +49,10 @@
                              Report
                           </a>
                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                             <a class="dropdown-item" href"#">Report by Category</a>
-                             <a class="dropdown-item" href"#">Report By Date</a>
-                             <a class="dropdown-item" href"#">Report By Month</a>
-                             <a class="dropdown-item" href"#">Report By Year</a>
+                             <a class="dropdown-item" href="{{route('transaction/reportByCategory')}}">Report by Category</a>
+                             <a class="dropdown-item" href="{{route('transaction/reportByDate')}}">Report By Date</a>
+                             <a class="dropdown-item" href="{{route('transaction/reportByMonth')}}">Report By Month</a>
+                             <a class="dropdown-item" href="{{route('transaction/reportByYear')}}">Report By Year</a>
                           </div>
                        </li>
                     @endguest

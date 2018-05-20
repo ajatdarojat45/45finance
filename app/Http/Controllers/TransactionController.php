@@ -68,9 +68,9 @@ class TransactionController extends Controller
    					$inserts[] = [
                      'note' => $value->note,
                      'nominal' => $value->amount,
-                     'category' => $value->category,
-                     'wallet' => $value->account,
-                     'currency' => $value->currency,
+                     'category' => strtoupper($value->category),
+                     'wallet' => strtoupper($value->account),
+                     // 'currency' => $value->currency,
                      'date' => DateTime::createFromFormat('d/m/Y', $value->date),
                      'user_id' => Auth::user()->id,
                   ];
@@ -180,5 +180,89 @@ class TransactionController extends Controller
       $wallets = Transaction::where('user_id', Auth::user()->id)->groupBy('wallet')->get();
 
       return view('transactions.reportByCategory', compact('date1', 'date2', 'dompet', 'wallets', 'chart', 'type'));
+   }
+
+   public function reportByDate(Request $request)
+   {
+      $date3 = '';
+
+      if (empty($request->date1)) {
+         $date1      = date('Y/m/d');
+         $date2      = date('Y/m/d');
+         $dompet     = 'all';
+      }else {
+         $date1      =  $request->date1;
+         $date2      =  $request->date2;
+         $dompet     =  $request->wallet;
+      }
+
+      if ($date2 < $date1) {
+         $date3 = $date2;
+         $date2 = $date1;
+         $date1 = $date3;
+      }
+
+      $transactions = new Transaction;
+      $chart = $transactions->reportByDate($date1, $date2, $dompet);
+
+      $wallets = Transaction::where('user_id', Auth::user()->id)->groupBy('wallet')->get();
+
+      return view('transactions.reportByDate', compact('date1', 'date2', 'dompet', 'wallets', 'chart'));
+   }
+
+   public function reportByMonth(Request $request)
+   {
+      $date3 = '';
+
+      if (empty($request->date1)) {
+         $date1      = date('Y/m/d');
+         $date2      = date('Y/m/d');
+         $dompet     = 'all';
+      }else {
+         $date1      =  $request->date1;
+         $date2      =  $request->date2;
+         $dompet     =  $request->wallet;
+      }
+
+      if ($date2 < $date1) {
+         $date3 = $date2;
+         $date2 = $date1;
+         $date1 = $date3;
+      }
+
+      $transactions = new Transaction;
+      $chart = $transactions->reportByMonth($date1, $date2, $dompet);
+
+      $wallets = Transaction::where('user_id', Auth::user()->id)->groupBy('wallet')->get();
+
+      return view('transactions.reportByMonth', compact('date1', 'date2', 'dompet', 'wallets', 'chart'));
+   }
+
+   public function reportByYear(Request $request)
+   {
+      $date3 = '';
+
+      if (empty($request->date1)) {
+         $date1      = date('Y/m/d');
+         $date2      = date('Y/m/d');
+         $dompet     = 'all';
+      }else {
+         $date1      =  $request->date1;
+         $date2      =  $request->date2;
+         $dompet     =  $request->wallet;
+      }
+
+      if ($date2 < $date1) {
+         $date3 = $date2;
+         $date2 = $date1;
+         $date1 = $date3;
+      }
+
+      $transactions = new Transaction;
+      $chart = $transactions->reportByYear($date1, $date2, $dompet);
+
+      $wallets = Transaction::where('user_id', Auth::user()->id)->groupBy('wallet')->get();
+
+      return view('transactions.reportByYear', compact('date1', 'date2', 'dompet', 'wallets', 'chart'));
    }
 }

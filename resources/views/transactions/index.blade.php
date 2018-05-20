@@ -142,7 +142,6 @@
    											 <tr>
                                         <td class="text-center">
                                            <input type="checkbox" name="transactions[]" value="{{$transaction->id}}">
-                                           {{csrf_field()}}
                                         </td>
    												 <td class="text-center">{{++$no}}</td>
    												 {{-- <td class="text-left">{{$transaction->currency}}</td> --}}
@@ -205,8 +204,9 @@
                                    <th></th>
                                </tr>
                                <tr>
+                                  {{csrf_field()}}
                                    <th colspan="10" style="text-align: center">
-                                      <button type="submit" name="button" class="btn btn-danger btn-sm btn-block" onclick="javasciprt: return confirm('Apakah anda yakun akan menghapus data ini?')">
+                                      <button type="submit" name="button" class="btn btn-danger btn-sm btn-block" onclick="javasciprt: return confirm('Are you sure, to delete this data?')">
                                          <i class="fa fa-trash"></i> Delete
                                        </button>
                                    </th>
@@ -222,11 +222,20 @@
 					<div id="graph" class="tab-pane">
 						<div class="panel-body">
 							<div class="text-center table-responsive">
+                        @php
+                           if (count($debetValues) != 0) {
+                              foreach ($debetValues as $debetValue => $value) {
+                                 $debetValuesConvert[] = $value * -1;
+                              }
+                           }else{
+                              $debetValuesConvert[] = '';
+                           }
+                        @endphp
 								{!! Charts::multi('line', 'highcharts')
 									->setTitle('Transaction Graph')
 									->setColors(['#ff0000', '#0000ff', '#00ff00'])
 									->setLabels($labels)
-                           ->setDataset('Debet', $debetValues)
+                           ->setDataset('Debet', $debetValuesConvert)
 									->setDataset('Credit', $creditValues)
 									->setDataset('Balance', $balanceValues)
 									->setDimensions(1000,500)
