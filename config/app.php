@@ -164,6 +164,7 @@ return [
         ConsoleTVs\Charts\ChartsServiceProvider::class,
         Vsmoraes\Pdf\PdfServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Stevebauman\Location\LocationServiceProvider::class,
 
     ],
 
@@ -219,6 +220,7 @@ return [
         'Charts' => ConsoleTVs\Charts\Charts::class,
         'PDF' => 'Vsmoraes\Pdf\PdfFacade',
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Location' => Stevebauman\Location\Facades\Location::class,
 
     ],
 
