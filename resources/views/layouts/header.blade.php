@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title') - 45 Finance</title>
+    <title>@yield('title') - uangKita</title>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
@@ -32,7 +32,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{-- {{ config('app.name', 'Laravel') }} --}}
-                    45 Finance
+                    uangKita
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -55,6 +55,10 @@
                              <a class="dropdown-item" href="{{route('transaction/reportByYear')}}">Report By Year</a>
                           </div>
                        </li>
+                       <li style="margin-left:10px;"><a class="nav-link" href="{{ route('documentation') }}" target="_blank">Documentation</a></li>
+                       @if (Auth::user()->id == 1)
+                          <li style="margin-left:10px;"><a class="nav-link" href="{{ route('log/index') }}">Log</a></li>
+                       @endif
                     @endguest
                     </ul>
                     <!-- Right Side Of Navbar -->

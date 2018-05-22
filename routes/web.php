@@ -25,6 +25,7 @@ Route::get('/register', function () {
     return view('register');
 });
 
+Route::get('log/store', 'LogController@store')->name('log/store');
 
 Auth::routes();
 
@@ -52,4 +53,7 @@ Route::group(['middleware' =>'auth'], function(){
    Route::get('transaction/exportToPdf/{date1}/{date2}/{wallet}/{category}', 'TransactionController@exportToPdf')->name('transaction/exportToPdf');
    Route::get('transaction/exportToExcel/{date1}/{date2}/{type}/{wallet}/{category}', 'TransactionController@exportToExcel')->name('transaction/exportToExcel');
    Route::get('transaction/reportByCategory', 'TransactionController@reportByCategory')->name('transaction/reportByCategory');
+
+   // $logs
+   Route::get('log/index', 'LogController@index')->name('log/index');
 });

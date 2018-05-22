@@ -74,11 +74,15 @@
       <!-- END Banner -->
 
    </header>
-
-
    <main class="container">
+      <br>
+         <div class="row">
+            <div class="text-center main-content" style="color:#636b6f;">
+              <a href="{{route('login')}}" target="_blank" style="color:#636b6f;">/Home</a>
+              <strong>/Documentation</strong>
+           </div>
+         </div>
       <div class="row">
-
          <!-- Sidebar -->
          <aside class="col-sm-3 sidebar">
 
@@ -133,7 +137,7 @@
                </p>
 
                <p>
-                  Teman-teman bisa menambahkan beberapa dompet dalam aplikasi ini, serta pengatur pengeluaran dan pemasukan berdasarkan kategori dan bisa di tambahkan keterangan di setiap transaksinya.
+                  Teman-teman bisa menambahkan beberapa dompet dalam aplikasi ini, serta mengatur pengeluaran dan pemasukan berdasarkan kategori dari setiap dompetnya dan bisa di tambahkan keterangan disetiap transaksinya sehingga transaksinya jelas.
                </p>
 
                <p>
@@ -177,7 +181,7 @@
                </p>
 
                <p>
-                  Seletah mendaftar teman-teman sudah bisa input data dengan cara import. Cukup seidakan format file excel (.xls/.xlsx) sebagai berikut:
+                  Seletah mendaftar teman-teman sudah bisa input data dengan cara import. Cukup sediakan format file excel (.xls/.xlsx) sebagai berikut:
                </p>
                <img src="{{asset('documentation-master/assets/images/excelFormat.jpeg')}} " class="image-center" alt="Sad Runner MTP Diagram">
                <p>
@@ -192,7 +196,7 @@
                   Setelah data ter-import teman-teman bisa dengan mudah melakukan pencarian transaksi dan membuat report baik itu by kategori, harian, bulanan ataupun tahunan.
                </p>
                <p>
-                  Untuk lebih jelasnya saya sudah menyiapkan data dummy dan akun demo silahkan teman-teman mencobanya.
+                  Untuk lebih jelasnya uangKita sudah menyiapkan data dummy dan akun demo silahkan teman-teman mencobanya.
                </p>
             </section>
 
