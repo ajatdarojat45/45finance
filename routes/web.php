@@ -32,6 +32,10 @@ Route::get('/home', function () {
    return redirect('dashboard');
 });
 
+Route::get('/documentation', function () {
+   return view('documentation');
+})->name('documentation');
+
 Route::group(['middleware' =>'auth'], function(){
    Route::get('/dashboard', function () {
       return view('dashboard');

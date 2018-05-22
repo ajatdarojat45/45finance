@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Login - 45 Finance</title>
+        <title>Login - uangKita</title>
         <!-- Fonts -->
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
@@ -77,7 +77,7 @@
                <div class="row">
                  <div class="col-lg-12 col-md-12">
                     <div style="border: 1px solid #a1a1a1; margin-top: 15px; padding: 30px;">
-                       <h2>45 Finance</h2>
+                       <h2>uangKita</h2>
                        <p><b>Please login</b> </p>
                        <form method="POST" action="{{ route('login') }}">
                            @csrf
@@ -138,7 +138,8 @@
                        </form>
                     </div>
                  </div>
-               </div>
+              </div><br>
+               <a href="{{route('documentation')}}" target="_blank">View Documentation</a><br>
                <br>
                <b><a href="https://ajatdarojat45.id" target="_blank" style="color:#636b6f;">lazyCode</a> - <i class="fa fa-code"></i> dengan <i class="fa fa-heart" style="color:red"></i> </b>
             </div>
