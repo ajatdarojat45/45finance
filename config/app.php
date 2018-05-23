@@ -165,7 +165,7 @@ return [
         Vsmoraes\Pdf\PdfServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
-
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -221,6 +221,7 @@ return [
         'PDF' => 'Vsmoraes\Pdf\PdfFacade',
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Location' => Stevebauman\Location\Facades\Location::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
     ],
 
