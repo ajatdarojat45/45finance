@@ -265,4 +265,18 @@ class TransactionController extends Controller
 
       return view('transactions.reportByYear', compact('date1', 'date2', 'dompet', 'wallets', 'chart'));
    }
+
+   public function store(Request $request)
+   {
+      $transaction = Transaction::create([
+                        'nominal'   => $request->nominal * $request->type,
+                        'wallet'    => $request->wallet,
+                        'category'  => $request->category,
+                        'note'      => $request->note,
+                        'date'      => $request->date,
+                        'user_id'   => Auth::user()->id,
+                     ]);
+
+      return back()->with('success', 'Data saved');
+   }
 }

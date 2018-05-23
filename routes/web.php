@@ -43,6 +43,7 @@ Route::group(['middleware' =>'auth'], function(){
    })->name('dashboard');
 
    // Transaction
+   Route::post('transaction/store', 'TransactionController@store')->name('transaction/store');
    Route::get('transaction/index', 'TransactionController@index')->name('transaction/index');
    Route::get('transaction/destroy/{id}', 'TransactionController@destroy')->name('transaction/destroy');
    Route::post('transaction/importExcel', 'TransactionController@importExcel')->name('transaction/importExcel');

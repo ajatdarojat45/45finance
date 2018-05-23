@@ -23,7 +23,7 @@
 	{{-- form --}}
 	<form style="border: 1px solid #a1a1a1;margin-top: 15px;padding: 10px;" action="{{ URL::to('transaction/importExcel') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
 		{{ csrf_field() }}
-		<label for="">Import your file here (.xsl & .xslx) :</label>
+		<label for="">Import your file here (Excel : .xls / .xlsx) :</label>
 		<div class="row">
 		  <div class="col-lg-3 col-md-3">
 			  <input type="file" name="import_file" />
@@ -46,6 +46,9 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-md-6 col-lg-6">
+                           <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                              <i class="fa fa-plus-circle"></i> Add
+                           </button><br><br>
    								 <label for="formGroupExampleInput">Search :</label>
 									 <form class="" action="{{route('transaction/index')}}" method="get">
                                <div class="input-group" style="margin-bottom:5px;">
@@ -106,6 +109,7 @@
 							<br>
 							<div class="table-responsive">
                         <form class="" action="{{route('transaction/multipleDestroy')}}" method="post">
+                           {{csrf_field()}}
    								<table id="example1" class="table table-hover table-striped">
    									 <thead>
    										  <tr>
@@ -204,7 +208,6 @@
                                    <th></th>
                                </tr>
                                <tr>
-                                  {{csrf_field()}}
                                    <th colspan="10" style="text-align: center">
                                       <button type="submit" name="button" class="btn btn-danger btn-sm btn-block" onclick="javasciprt: return confirm('Are you sure, to delete this data?')">
                                          <i class="fa fa-trash"></i> Delete
@@ -250,4 +253,104 @@
 			</div>
 		</div>
 	</div>
+   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <form class="" action="{{route('transaction/store')}}" method="post">
+     <div class="modal-dialog">
+       <div class="modal-content">
+         <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+           <h4 class="modal-title" id=""></h4>
+         </div>
+         <div class="modal-body">
+               <fieldset class="form-horizontal">
+                  <div class="form-group">
+                     @if ($errors->has('nominal'))
+                        <span class="help-block">
+                           <strong style="color: red">{{ $errors->first('nominal') }}</strong>
+                        </span>
+                     @endif
+                     <label class="col-sm-2 control-label">Nominal</label>
+                     <div class="col-sm-10">
+                        <input type="number" name="nominal" class="form-control" value="{{ old('nominal') }}">
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     @if ($errors->has('name'))
+                        <span class="help-block">
+                           <strong style="color: red">{{ $errors->first('type') }}</strong>
+                        </span>
+                     @endif
+                     <label class="col-sm-2 control-label">Type</label>
+                     <div class="col-sm-10">
+                        <select name="type" id="input" class="form-control" required="required" style="height:35px;">
+                           <option value="">-- Select Type --</option>
+                           <option value="-1">Debet</option>
+                           <option value="1">Credit</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     @if ($errors->has('wallet'))
+                        <span class="help-block">
+                           <strong style="color: red">{{ $errors->first('wallet') }}</strong>
+                        </span>
+                     @endif
+                     <label class="col-sm-2 control-label">Wallet</label>
+                     <div class="col-sm-10">
+                        <input type="text" name="wallet" class="form-control" value="{{ old('wallet') }}">
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     @if ($errors->has('category'))
+                        <span class="help-block">
+                           <strong style="color: red">{{ $errors->first('category') }}</strong>
+                        </span>
+                     @endif
+                     <label class="col-sm-2 control-label">Category</label>
+                     <div class="col-sm-10">
+                        <input type="text" name="category" class="form-control" value="{{ old('category') }}">
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     @if ($errors->has('fimz_id'))
+                        <span class="help-block">
+                           <strong style="color: red">{{ $errors->first('date') }}</strong>
+                        </span>
+                     @endif
+                     <label class="col-sm-2 control-label">Date</label>
+                     <div class="col-sm-10">
+                        <div class="" id="data_1">
+                           @if ($errors->has('start'))
+                              <span class="help-block">
+                                 <strong style="color: red"></strong>
+                              </span>
+                           @endif
+                           <div class="input-group date">
+                              <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value="{{ old('date') }}" name="date">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     @if ($errors->has('fimz_id'))
+                        <span class="help-block">
+                           <strong style="color: red">{{ $errors->first('note') }}</strong>
+                        </span>
+                     @endif
+                     <label class="col-sm-2 control-label">Note</label>
+                     <div class="col-sm-10">
+                        <textarea name="note" class="form-control">{{ old('note') }}</textarea>
+                     </div>
+                  </div>
+                  {{csrf_field()}}
+               </fieldset>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-times-circle"></i> Close</button>
+           <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> Save</button>
+         </div>
+       </div>
+     </div>
+  </form>
+   </div>
 @endsection
