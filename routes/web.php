@@ -37,6 +37,9 @@ Route::get('/documentation', function () {
    return view('documentation');
 })->name('documentation');
 
+Route::get('auth/{provider}', 'Auth\RegisterController@redirectToProvider')->name('auth');
+Route::get('auth/{provider}/callback', 'Auth\RegisterController@handleProviderCallback');
+
 Route::group(['middleware' =>'auth'], function(){
    Route::get('/dashboard', function () {
       return view('dashboard');

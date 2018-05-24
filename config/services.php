@@ -35,22 +35,28 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
-    'facebook' => [
-          'client_id' => '198844574172813',
-          'client_secret' => '9558fddb58874f70380d20a13b33e344',
-          'redirect' => 'http://localhost/uangKita/public/auth/facebook/callback',
-      ],
+   'facebook' => [
+      'client_id' => '198844574172813',
+      'client_secret' => '9558fddb58874f70380d20a13b33e344',
+      'redirect' => 'http://localhost/uangKita/public/auth/facebook/callback',
+   ],
 
-      'twitter' => [
-            'client_id' => 'rjG6sbRM6SwnULwt2gO42gb45',
-            'client_secret' => 'bgSG0avol8Kam9IncP1gvBoCwxFS6JOTYthAtQd8tMd4NtuYP8',
-            'redirect' => 'http://localhost/uangKita/public/auth/twitter/callback',
-        ],
+   'twitter' => [
+      'client_id' => 'rjG6sbRM6SwnULwt2gO42gb45',
+      'client_secret' => 'bgSG0avol8Kam9IncP1gvBoCwxFS6JOTYthAtQd8tMd4NtuYP8',
+      'redirect' => 'http://localhost/uangKita/public/auth/twitter/callback',
+   ],
 
-        'google' => [
-             'client_id' => '769996409959-2iieearvc8jirgqq7d75n82cau9deaoc.apps.googleusercontent.com',
-             'client_secret' => 'UfIIABwhw1qo64ubuv-08mKN',
-             'redirect' => 'http://localhost/uangKita/public/auth/google/callback',
-         ],
+   'google' => [
+      'client_id' => '769996409959-2iieearvc8jirgqq7d75n82cau9deaoc.apps.googleusercontent.com',
+      'client_secret' => 'UfIIABwhw1qo64ubuv-08mKN',
+      'redirect' => 'http://localhost/uangKita/public/auth/google/callback',
+   ],
+
+   'github' => [
+      'client_id' => '351d68b2b3c65214ae78',
+      'client_secret' => '31f223a18ef953b436cf53c82df32383605ed09b',
+      'redirect' => 'http://localhost/uangKita/public/auth/github/callback',
+   ],
 
 ];

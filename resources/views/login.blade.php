@@ -127,9 +127,32 @@
 
                                <div class="col-md-8">
                                   <button type="submit" class="btn btn-primary">
-                                      {{ __('Login') }}
+                                    <i class="fa fa-sign-in"></i>   {{ __('Login') }}
                                   </button>
                                </div>
+                           </div>
+                           <b>Or, Login with :</b><br><br>
+                           <div class="form-group row">
+                               <div class="col-md-3 col-lg-3">
+                                  <a href="{{route('auth', 'facebook')}}" class="btn btn-primary btn-social btn-facebook btn-sm">
+                                    <span class="fa fa-facebook"></span> Facebook
+                                  </a>
+                               </div>
+                               <div class="col-md-3 col-lg-3">
+                                  <a href="{{route('auth', 'twitter')}}" class="btn btn-primary btn-social btn-twitter btn-sm">
+                                    <span class="fa fa-twitter"></span> Twitter
+                                  </a>
+                               </div>
+                              <div class="col-md-3 col-lg-3">
+                                  <a href="{{route('auth', 'google')}}" class="btn btn-danger btn-social btn-google btn-sm">
+                                    <span class="fa fa-google"></span> Google
+                                  </a>
+                               </div>
+                               <div class="col-md-3 col-lg-3">
+                                   <a href="{{route('auth', 'github')}}"  style="color:black" class="btn btn-default btn-social btn-google btn-sm">
+                                     <span class="fa fa-github"></span> Github
+                                   </a>
+                                </div>
                            </div>
                            <b>Dont have a account ?</b>
                            <a class="btn btn-link" href="{{ route('register') }}">
